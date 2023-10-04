@@ -5,9 +5,10 @@
     /* CSS styling */
     body {
       font-family: Arial, sans-serif;
+      margin: 20px;
     }
 
-    #inputField {
+    #urlInput {
       width: 80%;
       padding: 10px;
       margin-bottom: 10px;
@@ -20,6 +21,7 @@
     #resultTable {
       border-collapse: collapse;
       width: 100%;
+      margin-top: 20px;
     }
 
     #resultTable th, #resultTable td {
@@ -34,16 +36,16 @@
   </style>
 </head>
 <body>
-  <label for="inputField">Enter URL:</label><br>
-  <input type="text" id="inputField" placeholder="Enter URL...">
+  <label for="urlInput">Enter URL:</label><br>
+  <input type="text" id="urlInput" placeholder="Enter URL...">
   <button onclick="getData()" id="getDataBtn">Get Data</button>
 
   <table id="resultTable">
     <thead>
       <tr>
-        <th>Column 1</th>
-        <th>Column 2</th>
-        <th>Column 3</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
       </tr>
     </thead>
     <tbody id="tableBody">
@@ -53,13 +55,11 @@
 
   <script>
     function getData() {
-      const url = document.getElementById('inputField').value;
+      const url = document.getElementById('urlInput').value;
 
-      // Make an AJAX request to the provided URL (You may need to handle CORS issues)
-      // Replace this with your actual implementation for fetching data from the URL.
-      // This is a simple example of how you might retrieve data using Fetch API.
+      // Make an AJAX request to the provided URL
       fetch(url)
-        .then(response => response.json()) // Assuming JSON response, modify as needed
+        .then(response => response.json())
         .then(data => {
           const tableBody = document.getElementById('tableBody');
           tableBody.innerHTML = '';
@@ -68,11 +68,11 @@
           data.forEach(item => {
             const row = document.createElement('tr');
             const cell1 = document.createElement('td');
-            cell1.textContent = item.field1; // Replace with your data field
+            cell1.textContent = item.id;
             const cell2 = document.createElement('td');
-            cell2.textContent = item.field2; // Replace with your data field
+            cell2.textContent = item.name;
             const cell3 = document.createElement('td');
-            cell3.textContent = item.field3; // Replace with your data field
+            cell3.textContent = item.price;
 
             row.appendChild(cell1);
             row.appendChild(cell2);
