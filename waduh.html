@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* CSS styling */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #inputField {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    #getDataBtn {
+      padding: 10px 20px;
+    }
+
+    #resultTable {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #resultTable th, #resultTable td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    #resultTable th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <label for="inputField">Enter URL:</label><br>
+  <input type="text" id="inputField" placeholder="Enter URL...">
+  <button onclick="getData()" id="getDataBtn">Get Data</button>
+
+  <table id="resultTable">
+    <thead>
+      <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <!-- Table content will be added here -->
+    </tbody>
+  </table>
+
+  <script>
+    function getData() {
+      const url = document.getElementById('inputField').value;
+
+      // Make an AJAX request to the provided URL (You may need to handle CORS issues)
+      // Replace this with your actual implementation for fetching data from the URL.
+      // This is a simple example of how you might retrieve data using Fetch API.
+      fetch(url)
+        .then(response => response.json()) // Assuming JSON response, modify as needed
+        .then(data => {
+          const tableBody = document.getElementById('tableBody');
+          tableBody.innerHTML = '';
+
+          // Populate the table with the data
+          data.forEach(item => {
+            const row = document.createElement('tr');
+            const cell1 = document.createElement('td');
+            cell1.textContent = item.field1; // Replace with your data field
+            const cell2 = document.createElement('td');
+            cell2.textContent = item.field2; // Replace with your data field
+            const cell3 = document.createElement('td');
+            cell3.textContent = item.field3; // Replace with your data field
+
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            row.appendChild(cell3);
+            tableBody.appendChild(row);
+          });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+  </script>
+</body>
+</html>
